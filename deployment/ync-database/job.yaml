@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ync-job
+  namespace: ync
+spec:
+  template:
+    spec:
+      containers:
+      - name: ync-job
+        image: ync-job:latest
+        imagePullPolicy: Never
+        args: ["--dist", "DIST", "folder", "file"]
+        env:
+        - name: CONTACT_POINT
+          value: ""
+        - name: USERNAME
+          value: ""
+        - name: PASSWORD
+          value: ""
+      restartPolicy: Never
+  backoffLimit: 4

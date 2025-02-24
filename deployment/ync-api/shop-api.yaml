@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-api
+  namespace: ync
+  labels:
+    app: shop-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop-api
+  template:
+    metadata:
+      labels:
+        app: shop-api
+    spec:
+      containers:
+      - name: shop-api
+        image: ync-shop-api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DRIVER
+          value: "mongodb"
+        - name: MONGO_CONTACT_POINT
+          value: "10.43.6.0:27017"
+        - name: MONGO_USERNAME
+          value: "shop_api"
+        - name: MONGO_PASSWORD
+          value: "shop_api"
+        - name: HTTPS_PORT
+          value: "443"
+        - name: COOKIE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: all-secrets
+              key: SHOP_API_COOKIE_SECRET
+        - name: PAYPAL_ENDPOINT
+          value: "https://api-m.paypal.com"
+        - name: PAYPAL_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: all-secrets
+              key: SHOP_API_PAYPAL_CLIENT_ID
+        - name: PAYPAL_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: all-secrets
+              key: SHOP_API_PAYPAL_CLIENT_SECRET
+        - name: ZOHO_MAIL
+          valueFrom:
+            secretKeyRef:
+              name: all-secrets
+              key: SHOP_API_ZOHO_MAIL
+        - name: ZOHO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: all-secrets
+              key: SHOP_API_ZOHO_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-api
+  namespace: ync
+spec:
+  type: ClusterIP
+  clusterIP: 10.43.6.1
+  selector:
+    app: shop-api
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8080
