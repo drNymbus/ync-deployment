@@ -22,10 +22,12 @@ spec:
         ports:
         - containerPort: 3000
         env:
+        - name: PUBLIC_URL
+          value: "https://yn-corp.xyz/shop"
         - name: API_CONTACT_POINTS
           value: "10.43.6.1"
         - name: API_PORT
-          value: "443"
+          value: "80"
 ---
 apiVersion: v1
 kind: Service

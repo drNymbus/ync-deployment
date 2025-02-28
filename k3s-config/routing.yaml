@@ -41,7 +41,7 @@ spec:
             name: shop-api
             port:
              # Port number to forward traffic to
-              number: 443
+              number: 80
       - path: /shop
         pathType: Prefix
         backend:
@@ -50,4 +50,4 @@ spec:
             name: shop-app
             port:
              # Port number to forward traffic to
-              number: 443
+              number: 80

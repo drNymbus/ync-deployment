@@ -72,5 +72,5 @@ spec:
     app: shop-api
   ports:
     - protocol: TCP
-      port: 443
+      port: 80
       targetPort: 8080
