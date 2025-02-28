@@ -9,6 +9,7 @@ metadata:
     ingress.kubernetes.io/rewrite-target: /
     # Add Cert-Manager SSL certificates as the name of the ClusterIssuer resource
     cert-manager.io/cluster-issuer: letsencrypt-certificate
+    traefik.ingress.kubernetes.io/router.middlewares: ync-redirect@kubernetescrd
 spec:
   # TLS configuration for HTTPS
   tls:

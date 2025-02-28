@@ -1,2 +1,3 @@
+deployment/cert-delivery.yaml
 deployment/secrets.yaml
 deployment/ssl.yaml
