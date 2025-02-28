@@ -42,3 +42,12 @@ spec:
             port:
              # Port number to forward traffic to
               number: 443
+      - path: /shop
+        pathType: Prefix
+        backend:
+          service:
+           # Name of your service resource
+            name: shop-app
+            port:
+             # Port number to forward traffic to
+              number: 443
