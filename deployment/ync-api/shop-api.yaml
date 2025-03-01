@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: shop-api
-        image: ync-shop-api:latest
+        image: ync-api-shop:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
